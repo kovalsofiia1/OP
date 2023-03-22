@@ -237,7 +237,7 @@ void count_prize(string name){
             }
         }
         else if(h<9 && h1>=9){
-            int hv_do=(9-h)*60 - (60-m);
+            int hv_do=(9-h)*60 -m;
             int hv_pisla=(h1-9)*60 +m1;
             call2[0].prize=0.9*hv_do + 1.5*hv_pisla;
             call2[0].minutes= hv_do+hv_pisla;
