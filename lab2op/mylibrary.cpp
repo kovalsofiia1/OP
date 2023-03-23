@@ -73,8 +73,8 @@ void fillauto(fstream& f,string name){
     Calls call[6]= {
             {"0507237372", "07:30", "09:35"},
             {"0674346679", "13:15", "13:27"},
-            {"0976435673", "02:30", "02:31"},
-            {"0956678543", "10:45", "11:03"},
+            {"0976435673", "02:30", "20:31"},
+            {"0956678543", "08:45", "00:03"},
             {"0664587999","19:57", "20:13"}
     };
 
@@ -150,10 +150,10 @@ void fill_you(fstream& f,string name){
             } else if ((h1 < 0 || h1 > 23) || (m1 < 0 || m1 > 59)) {
                 cout << "Hour was entered incorrectly!" << endl;
                 error = 1;
-            } else if (h1 < h || (h1==h && m1 <= m)) {
+            } /*else if (h1 < h || (h1==h && m1 <= m)) {
                 cout << "This end time can't be possible!" << endl;
                 error = 1;
-            }
+            }*/
         } while (error);
         //cout << c.phone_n << " " << c.start <<" "<< c.end <<endl;
         f.open(name,ios::binary|ios::app);
@@ -226,7 +226,7 @@ void count_prize(string name){
         h1 = atoi(hour1);
         m1 = atoi(min1);
 
-        if(h1-h==0){
+        if(h1-h==0 && m1>m){
             call2[0].hours=0;
             call2[0].minutes=m1-m;
             if(h>=9 && h<20){
@@ -236,7 +236,7 @@ void count_prize(string name){
                 call2[0].prize=0.9*call2[0].minutes;
             }
         }
-        else if(h<9 && h1>=9){
+        else if(h<9 && h1>=9&& h1<20){
             int hv_do=(9-h)*60 -m;
             int hv_pisla=(h1-9)*60 +m1;
             call2[0].prize=0.9*hv_do + 1.5*hv_pisla;
@@ -244,7 +244,7 @@ void count_prize(string name){
             call2[0].hours= call2[0].minutes/60;
             call2[0].minutes=(call2[0].minutes%60);
         }
-        else if(h<20 && h1>=20){
+        else if(h>=9 && h<20 && h1>=20){
             int hv_do=(20-h)*60 -m;
             int hv_pisla=(h1-20)*60 +m1;
             call2[0].prize=1.5*hv_do + 0.9*hv_pisla;
@@ -252,14 +252,63 @@ void count_prize(string name){
             call2[0].hours= call2[0].minutes/60;
             call2[0].minutes=(call2[0].minutes%60);
         }
-        else if((h>=9 && h1<20) || (h>=20 && h1<9)){
+
+        else if(h>=0 && h<9 && h1>=20){
+            int hv_do=(9-h)*60-m+(h1-20)*60+m1;
+            int hv_pisla=11*60;//09-20
+            call2[0].minutes=hv_do+hv_pisla;
+            call2[0].hours= call2[0].minutes/60;
+            call2[0].minutes=(call2[0].minutes%60);
+            call2[0].prize=1.5*hv_pisla+0.9*hv_do;
+        }
+        else if((h<h1 || (h1==h && m <= m1))&& ((h>=9 && h<20 && h1>=9 && h1<20) )){
             call2[0].minutes= (h1-h)*60 -m +m1;
-            if(h>=9 && h<20 && h1>=9 && h1<20) {call2[0].prize=1.5*call2[0].minutes;}
-            else {call2[0].prize=0.9*call2[0].minutes;}
+            call2[0].prize=1.5*call2[0].minutes;
             call2[0].hours= call2[0].minutes/60;
             call2[0].minutes=(call2[0].minutes%60);
         }
-        temp.write(reinterpret_cast<char*>(call2),sizeof(newCalls));
+        else if((h<h1 || (h1==h && m <= m1))&&  (h<9 && h1<9 || h>=20 && h1>=20 )){
+            call2[0].minutes= (h1-h)*60 -m +m1;
+         call2[0].prize=0.9*call2[0].minutes;
+            call2[0].hours= call2[0].minutes/60;
+            call2[0].minutes=(call2[0].minutes%60);
+        }
+
+        else if (h1 < h || (h1==h && m1 <= m)){//перехід через північ
+            int hv_do;
+            int hv_pisla;//09-20
+            if(h>=0 && h<9){
+                    hv_do=(9-h)*60-m+(24-20)*60+h1*60+m1;
+                    hv_pisla=(20-9)*60;
+            }else if(h>=9 && h<20){
+                if(h1>=0 && h1<9){
+                    hv_pisla=(20-h)*60-m;
+                    hv_do=(24-20)*60+h1*60+m1;
+                }else if(h1>=9 && h1<20){
+                    hv_pisla=(20-h)*60-m+(h1-9)*60-m1;
+                    hv_do=(24-20+9)*60;
+                }
+            }else if(h>=20){
+                if(h1>=0 && h1<9){
+                    hv_pisla=0;
+                    hv_do=(24-h)*60-m+h1*60+m1;
+                }
+                else if(h1>=9 && h1<20){
+                    hv_pisla=(h1-9)*60+m1;
+                    hv_do=(24-h)*60-m + 9*60;
+                }
+                else if(h1>=20){
+                    hv_pisla=(20-9)*60;
+                    hv_do=(24-h)*60-m+9*60+(h1-20)*60+m1;
+                }
+            }
+            call2[0].minutes=hv_do+hv_pisla;
+            call2[0].hours= call2[0].minutes/60;
+            call2[0].minutes=(call2[0].minutes%60);
+            call2[0].prize=1.5*hv_pisla+0.9*hv_do;
+        }
+
+            temp.write(reinterpret_cast<char*>(call2),sizeof(newCalls));
     }
     temp.close();
     f.close();
@@ -279,7 +328,7 @@ void delete_short_calls(string name){
     check_if_open(temp,temp1);
     newCalls call2[1];
     while(f.read(reinterpret_cast<char*>(call2),sizeof(newCalls))) {
-        if(call2[0].hours>=0 && call2[0].minutes>=3){
+        if(call2[0].hours>0 || call2[0].hours==0 && call2[0].minutes>=3){
             temp.write(reinterpret_cast<char*>(call2),sizeof(newCalls));
         }
 
