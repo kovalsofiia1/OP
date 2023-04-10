@@ -79,7 +79,7 @@ Numeral_8 Numeral_8::operator+(Numeral_8 obj){
 }
 int increment(){
     int num,error;
-    cout << "\tEnter the number you want to add to N2: " << endl;
+    cout << "\tEnter the number you want to add to N2 (decimal system): " << endl;
     do {error=0;
         cin >> num;
         if(!cin){
