@@ -25,6 +25,8 @@ public:
         return number;
     }
     friend Numeral_8 getinput(string);
+    friend int OctalToDecimal(int );
+    friend int DecimalToOctal(int );
 };
 
 bool isOctal(int);
