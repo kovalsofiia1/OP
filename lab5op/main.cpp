@@ -1,13 +1,19 @@
 #include "l5lib.h"
 int main() {
 
-    TEquation* equations[n+m];
+    string k;
+do {
+    TEquation *equations[n + m];
     fill_equations(equations);
     solve_equations(equations);
     find_sum1(equations);
-    int nn;float root;
-    get_input(nn,root);
-    is_root(equations,nn,root);
+    int nn;
+    float root;
+    get_input(nn, root);
+    is_root(equations, nn, root);
+    cin.ignore();
+    getline(cin,k);
+}while(k.empty());
     return 0;
 }
 
