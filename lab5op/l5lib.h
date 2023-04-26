@@ -53,8 +53,7 @@ public:
 };
 
 class QuadraticEquation:public TEquation{
-    //float a,b,c;
-    //float x1,x2;
+  
 public:
     QuadraticEquation(float _b,float _c,float _a){Set(_a,_b,_c);}
     void result() override;
