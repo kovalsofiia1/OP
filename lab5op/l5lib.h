@@ -44,6 +44,23 @@ public:
     virtual void check()=0;
     virtual void show()=0;
 };
+class LinearEquation:public TEquation{
+public:
+    LinearEquation(float _b,float _c){Set(0,_b,_c);x2=0;}
+    void result() override;
+    void check()override;
+    void show() override ;
+};
+
+class QuadraticEquation:public TEquation{
+    //float a,b,c;
+    //float x1,x2;
+public:
+    QuadraticEquation(float _b,float _c,float _a){Set(_a,_b,_c);}
+    void result() override;
+    void check() override ;
+    void show() override;
+};
 void fill_equations(TEquation* (&equation)[n+m]);
 void solve_equations(TEquation* (&equation)[n+m]);
 void find_sum1(TEquation* (&equation)[n+m]);
