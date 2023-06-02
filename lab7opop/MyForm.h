@@ -149,27 +149,33 @@ namespace lab7opop {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(36, 119);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(26, 117);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(77, 20);
+			this->label1->Size = System::Drawing::Size(87, 22);
 			this->label1->TabIndex = 5;
 			this->label1->Text = L"Діапазон";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->label2->Location = System::Drawing::Point(26, 205);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(202, 20);
+			this->label2->Size = System::Drawing::Size(225, 22);
 			this->label2->TabIndex = 6;
 			this->label2->Text = L"Число, на яке помножити";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->label3->Location = System::Drawing::Point(26, 26);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(108, 20);
+			this->label3->Size = System::Drawing::Size(121, 22);
 			this->label3->TabIndex = 7;
 			this->label3->Text = L"Дійсне число";
 			// 
@@ -194,18 +200,22 @@ namespace lab7opop {
 			// label4
 			// 
 			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->label4->Location = System::Drawing::Point(347, 160);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(65, 20);
+			this->label4->Size = System::Drawing::Size(70, 22);
 			this->label4->TabIndex = 10;
 			this->label4->Text = L"Файл 1";
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
+			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->label5->Location = System::Drawing::Point(347, 291);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(65, 20);
+			this->label5->Size = System::Drawing::Size(70, 22);
 			this->label5->TabIndex = 11;
 			this->label5->Text = L"Файл 2";
 			// 
@@ -221,12 +231,13 @@ namespace lab7opop {
 			// 
 			// file2_show
 			// 
+			this->file2_show->BackColor = System::Drawing::Color::Snow;
 			this->file2_show->Location = System::Drawing::Point(30, 378);
 			this->file2_show->Name = L"file2_show";
 			this->file2_show->Size = System::Drawing::Size(308, 46);
 			this->file2_show->TabIndex = 13;
 			this->file2_show->Text = L"Показати файл 2";
-			this->file2_show->UseVisualStyleBackColor = true;
+			this->file2_show->UseVisualStyleBackColor = false;
 			this->file2_show->Click += gcnew System::EventHandler(this, &MyForm::file2_show_Click);
 			// 
 			// input
@@ -241,9 +252,11 @@ namespace lab7opop {
 			// label6
 			// 
 			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->label6->Location = System::Drawing::Point(351, 25);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(119, 20);
+			this->label6->Size = System::Drawing::Size(131, 22);
 			this->label6->TabIndex = 15;
 			this->label6->Text = L"Введені числа";
 			// 
@@ -261,6 +274,7 @@ namespace lab7opop {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Pink;
 			this->ClientSize = System::Drawing::Size(579, 467);
 			this->Controls->Add(this->file1_clear);
 			this->Controls->Add(this->label6);
@@ -287,289 +301,18 @@ namespace lab7opop {
 		}
 #pragma endregion
 		private:
-			bool dotEntereda = false;
-			bool dotEnterednum = false;
-			bool minusEntereda = false;
-			bool minusEnterednum = false;
-			bool dotEnteredb = false;
-			bool minusEnteredb = false;
-			bool dotEnteredm = false;
-			bool minusEnteredm = false;
-
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ nn = number->Text;
-		string num = marshal_as<std::string>(nn);
-		try {
-			if (number->Text == "") {
-				throw "Please input coordinates!";
-			}
-			if (num.find("-") != -1 && num.find("-") > 0) {
-				number->Text = "";
-				throw "Minus in the wrong place!";
-				
-			}
-			if (num.find(",") != -1 && num.find(",") == 0) {
-				number->Text = "";
-				throw "Decimal point in the wrong place!";
-
-			}
 			
-				double n = Convert::ToDouble(nn);
-				file->AddNumber(n);
-				input->Items->Add(nn);
-				number->Text = "";
-			
-		}
-		catch (const char* s) {
-			string ss = s;
-			cout << ss << endl;
-			String^ sss = marshal_as<String^>(ss);
-			MessageBox::Show(sss);
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e); 
+	
+	private: System::Void file1_show_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void file2_show_Click(System::Object^ sender, System::EventArgs^ e); 
+private: System::Void file1_clear_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void number_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 
-		}
-		dotEntereda = false;
-		dotEnterednum = false;
-		minusEntereda = false;
-		minusEnterednum = false;
-		dotEnteredb = false;
-		minusEnteredb = false;
-		dotEnteredm = false;
-		minusEnteredm = false;
+private: System::Void a_t_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 
+private: System::Void b_t_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 
-	}
-	private: System::Void file1_show_Click(System::Object^ sender, System::EventArgs^ e) {
-		file1->Items->Clear();
-		file->ReadFile();
-		ifstream file11;
-		file11.open(file->GetName(), std::ios::binary);
-		if (!file11.is_open()) {
-			MessageBox::Show("Can't open file");
-			return;
-		}
-
-		double n;
-		while (file11.read(reinterpret_cast<char*>(&n), sizeof(double))) {
-			file1->Items->Add(n);
-		}
-
-		file11.close();
-		
-
-	}
-	private: System::Void file2_show_Click(System::Object^ sender, System::EventArgs^ e) {
-		try {
-			if (a_t->Text == "" || b_t->Text == "" || multiple->Text == ""|| input->Items->Count==0) {
-				throw 1;
-			}
-			String^ aa = a_t->Text;
-			string aaa = marshal_as<std::string>(aa);
-			String^ bb = b_t->Text;
-			string bbb = marshal_as<std::string>(bb);
-			String^ mm = multiple->Text;
-			string mmm = marshal_as<std::string>(mm);
-			
-				if (aaa.find("-") != -1 && aaa.find("-") > 0) {
-					a_t->Text = "";
-					throw "Minus in the wrong place!";
-
-				}
-
-				if ( bbb.find("-") != -1 && bbb.find("-") > 0 ) {
-					b_t->Text = "";
-					throw "Minus in the wrong place!";
-
-				}
-
-				if ( mmm.find("-") != -1 && mmm.find("-") > 0) {
-					multiple ->Text = "";
-					throw "Minus in the wrong place!";
-
-				}
-				if (aaa.find(",") != -1 && aaa.find(",") == 0) {
-					a_t->Text = "";
-					throw "Decimal point in the wrong place!";
-
-				}
-				if (bbb.find(",") != -1 && bbb.find(",") == 0) {
-					b_t->Text = "";
-					throw "Decimal point in the wrong place!";
-
-				}
-				if (mmm.find(",") != -1 && mmm.find(",") == 0) {
-					multiple->Text = "";
-					throw "Decimal point in the wrong place!";
-
-				}
-
-			
-			file2->Items->Clear();
-
-			
-			double a = Convert::ToDouble(aa);		
-			double b = Convert::ToDouble(bb);
-			double m = Convert::ToDouble(mm);
-			//try {
-				file->WriteToAnother(a, b, m, newfile);
-
-				ifstream file11;
-				file11.open(newfile->GetName(), std::ios::binary);
-				if (!file11.is_open()) {
-					MessageBox::Show("Can't open file");
-					return;
-				}
-
-				double n;
-				while (file11.read(reinterpret_cast<char*>(&n), sizeof(double))) {
-					file2->Items->Add(n);
-				}
-
-				file11.close();
-			//}
-		/*
-			catch (const char* s) {
-				string ss = s;
-				cout << ss << endl;
-				String^ sss = marshal_as<String^>(ss);
-				MessageBox::Show(sss);
-
-			}
-			*/	
-			
-		}
-		
-		catch (int i) {
-			MessageBox::Show("Fill all filds!");
-		}
-		catch (const char* s) {
-			string ss = s;
-			cout << ss << endl;
-			String^ sss = marshal_as<String^>(ss);
-			MessageBox::Show(sss);
-
-		}
-		dotEntereda = false;
-		dotEnterednum = false;
-		minusEntereda = false;
-		minusEnterednum = false;
-		dotEnteredb = false;
-		minusEnteredb = false;
-		dotEnteredm = false;
-		minusEnteredm = false;
-
-	}
-	private: System::Void file1_clear_Click(System::Object^ sender, System::EventArgs^ e) {
-		file1->Items->Clear();
-		a_t->Text = "";
-		b_t->Text = "";
-		multiple->Text = "";
-		file->Clear_File();
-		file2->Items->Clear();
-		input->Items->Clear();
-
-	}
-private: System::Void number_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != '-' && e->KeyChar != '\b') {
-		MessageBox::Show("Please enter only numbers.");
-		e->Handled = true;
-	}
-	else if (e->KeyChar == ',' && dotEnterednum || e->KeyChar == '-' && minusEnterednum) {
-		if (e->KeyChar == ',') {
-			MessageBox::Show("You have already entered a decimal point.");
-		}
-		if (e->KeyChar == '-') {
-			MessageBox::Show("You have already entered  minus.");
-		}
-		e->Handled = true;
-	}
-	else {
-		if (e->KeyChar == ',') {
-			dotEnterednum = (e->KeyChar == ',') ? true : dotEnterednum;
-		}
-		if (e->KeyChar == '-') {
-			minusEnterednum = (e->KeyChar == '-') ? true : minusEnterednum;
-		}
-
-
-	}
-}
-
-private: System::Void a_t_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != '-' && e->KeyChar != '\b') {
-		MessageBox::Show("Please enter only numbers.");
-		e->Handled = true;
-	}
-	else if (e->KeyChar == ',' && dotEntereda || e->KeyChar == '-' && minusEntereda) {
-		if (e->KeyChar == ',') {
-			MessageBox::Show("You have already entered a decimal point.");
-		}
-		if (e->KeyChar == '-') {
-			MessageBox::Show("You have already entered  minus.");
-		}
-		e->Handled = true;
-	}
-	else {
-		if (e->KeyChar == ',') {
-			dotEntereda = (e->KeyChar == ',') ? true : dotEntereda;
-		}
-		if (e->KeyChar == '-') {
-			minusEntereda = (e->KeyChar == '-') ? true : minusEntereda;
-		}
-
-
-	}
-}
-
-private: System::Void b_t_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != '-' && e->KeyChar != '\b') {
-		MessageBox::Show("Please enter only numbers.");
-		e->Handled = true;
-	}
-	else if (e->KeyChar == ',' && dotEnteredb || e->KeyChar == '-' && minusEnteredb) {
-		if (e->KeyChar == ',') {
-			MessageBox::Show("You have already entered a decimal point.");
-		}
-		if (e->KeyChar == '-') {
-			MessageBox::Show("You have already entered  minus.");
-		}
-		e->Handled = true;
-	}
-	else {
-		if (e->KeyChar == ',') {
-			dotEnteredb = (e->KeyChar == ',') ? true : dotEnteredb;
-		}
-		if (e->KeyChar == '-') {
-			minusEnteredb = (e->KeyChar == '-') ? true : minusEnteredb;
-		}
-
-
-	}
-}
-
-private: System::Void multiple_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != '-' && e->KeyChar != '\b') {
-		MessageBox::Show("Please enter only numbers.");
-		e->Handled = true;
-	}
-	else if (e->KeyChar == ',' && dotEnteredm || e->KeyChar == '-' && minusEnteredm) {
-		if (e->KeyChar == ',') {
-			MessageBox::Show("You have already entered a decimal point.");
-		}
-		if (e->KeyChar == '-') {
-			MessageBox::Show("You have already entered  minus.");
-		}
-		e->Handled = true;
-	}
-	else {
-		if (e->KeyChar == ',') {
-			dotEnteredm = (e->KeyChar == ',') ? true : dotEnteredm;
-		}
-		if (e->KeyChar == '-') {
-			minusEnteredm = (e->KeyChar == '-') ? true : minusEnteredm;
-		}
-
-
-	}
-}
+private: System::Void multiple_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 };
 }
